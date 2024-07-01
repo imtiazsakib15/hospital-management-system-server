@@ -28,4 +28,23 @@ const createPatient = async (
   }
 };
 
-export const patientControllers = { createPatient };
+const getAllPatients = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const patients = await Patient.find({});
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Patient retrieved',
+      data: patients,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const patientControllers = { createPatient, getAllPatients };
