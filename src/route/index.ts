@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { patientRoutes } from './patient.route';
+import { hospitalRoutes } from './hospital.route';
 
 const router = Router();
 
@@ -13,6 +14,10 @@ const moduleRoutes: IModuleRoutes[] = [
   {
     path: '/patients',
     route: patientRoutes,
+  },
+  {
+    path: '/hospitals',
+    route: hospitalRoutes,
   },
 ];
 

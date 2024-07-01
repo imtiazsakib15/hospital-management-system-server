@@ -10,7 +10,4 @@ const hospitalSchema = new Schema<IHospital>(
   { timestamps: true },
 );
 
-export const HospitalIHospital = model<IHospital>(
-  'HospitalIHospital',
-  hospitalSchema,
-);
+export const Hospital = model<IHospital>('Hospital', hospitalSchema);
