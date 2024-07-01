@@ -47,4 +47,28 @@ const getAllHospitals = async (
   }
 };
 
-export const hospitalControllers = { createHospital, getAllHospitals };
+const deleteHospital = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await Hospital.deleteOne({ id });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Hospital deleted',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const hospitalControllers = {
+  createHospital,
+  getAllHospitals,
+  deleteHospital,
+};
