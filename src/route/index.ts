@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { patientRoutes } from './patient.route';
 import { hospitalRoutes } from './hospital.route';
 import { specializationRoutes } from './specialization.route';
+import { doctorRoutes } from './doctor.route';
 
 const router = Router();
 
@@ -23,6 +24,10 @@ const moduleRoutes: IModuleRoutes[] = [
   {
     path: '/specializations',
     route: specializationRoutes,
+  },
+  {
+    path: '/doctors',
+    route: doctorRoutes,
   },
 ];
 
