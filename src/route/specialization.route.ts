@@ -10,6 +10,8 @@ router.post(
 
 router.get('/', specializationControllers.getAllSpecializations);
 
+router.patch('/:id', specializationControllers.updateSpecialization);
+
 router.delete('/:id', specializationControllers.deleteSpecialization);
 
 export const specializationRoutes = router;

@@ -47,6 +47,29 @@ const getAllSpecializations = async (
   }
 };
 
+const updateSpecialization = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const { specialization } = req.body;
+    const result = await Specialization.updateOne({ id }, specialization, {
+      new: true,
+    });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Specialization updated',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteSpecialization = async (
   req: Request,
   res: Response,
@@ -70,5 +93,6 @@ const deleteSpecialization = async (
 export const specializationControllers = {
   createSpecialization,
   getAllSpecializations,
+  updateSpecialization,
   deleteSpecialization,
 };
