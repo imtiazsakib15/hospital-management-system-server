@@ -7,4 +7,6 @@ router.post('/create-doctor', doctorControllers.createDoctor);
 
 router.get('/', doctorControllers.getAllDoctors);
 
+router.delete('/:id', doctorControllers.deleteDoctor);
+
 export const doctorRoutes = router;

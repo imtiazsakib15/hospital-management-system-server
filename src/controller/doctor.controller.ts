@@ -47,4 +47,24 @@ const getAllDoctors = async (
   }
 };
 
-export const doctorControllers = { createDoctor, getAllDoctors };
+const deleteDoctor = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await Doctor.deleteOne({ id });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Doctor deleted',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const doctorControllers = { createDoctor, getAllDoctors, deleteDoctor };
