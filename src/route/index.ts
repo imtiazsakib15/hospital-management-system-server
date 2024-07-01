@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { patientRoutes } from './patient.route';
 
 const router = Router();
 
@@ -9,10 +10,10 @@ interface IModuleRoutes {
 }
 
 const moduleRoutes: IModuleRoutes[] = [
-  // {
-  //   path: '/users',
-  //   route: UserRoutes,
-  // },
+  {
+    path: '/patients',
+    route: patientRoutes,
+  },
 ];
 
 moduleRoutes.forEach((route: IModuleRoutes) =>
