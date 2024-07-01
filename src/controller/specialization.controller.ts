@@ -47,7 +47,28 @@ const getAllSpecializations = async (
   }
 };
 
+const deleteSpecialization = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await Specialization.deleteOne({ id });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Specialization deleted',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const specializationControllers = {
   createSpecialization,
   getAllSpecializations,
+  deleteSpecialization,
 };
