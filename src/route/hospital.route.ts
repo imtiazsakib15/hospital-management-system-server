@@ -5,4 +5,6 @@ const router = Router();
 
 router.post('/create-hospital', hospitalControllers.createHospital);
 
+router.get('/', hospitalControllers.getAllHospitals);
+
 export const hospitalRoutes = router;

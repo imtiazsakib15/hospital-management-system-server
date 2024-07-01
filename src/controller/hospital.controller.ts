@@ -28,4 +28,23 @@ const createHospital = async (
   }
 };
 
-export const hospitalControllers = { createHospital };
+const getAllHospitals = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const hospitals = await Hospital.find({});
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Hospitals retrieved',
+      data: hospitals,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const hospitalControllers = { createHospital, getAllHospitals };
