@@ -39,7 +39,7 @@ const getAllPatients = async (
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'Patient retrieved',
+      message: 'Patients retrieved',
       data: patients,
     });
   } catch (error) {

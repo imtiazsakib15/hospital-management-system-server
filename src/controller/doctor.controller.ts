@@ -28,4 +28,23 @@ const createDoctor = async (
   }
 };
 
-export const doctorControllers = { createDoctor };
+const getAllDoctors = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const doctors = await Doctor.find({});
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Doctors retrieved',
+      data: doctors,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const doctorControllers = { createDoctor, getAllDoctors };
