@@ -47,6 +47,27 @@ const getAllHospitals = async (
   }
 };
 
+const updateHospital = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const { hospital } = req.body;
+    const result = await Hospital.updateOne({ id }, hospital, { new: true });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Hospital updated',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteHospital = async (
   req: Request,
   res: Response,
@@ -70,5 +91,6 @@ const deleteHospital = async (
 export const hospitalControllers = {
   createHospital,
   getAllHospitals,
+  updateHospital,
   deleteHospital,
 };
