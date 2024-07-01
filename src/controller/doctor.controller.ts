@@ -47,6 +47,27 @@ const getAllDoctors = async (
   }
 };
 
+const updateDoctor = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const { doctor } = req.body;
+    const result = await Doctor.updateOne({ id }, doctor, { new: true });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Doctor updated',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteDoctor = async (
   req: Request,
   res: Response,
@@ -67,4 +88,9 @@ const deleteDoctor = async (
   }
 };
 
-export const doctorControllers = { createDoctor, getAllDoctors, deleteDoctor };
+export const doctorControllers = {
+  createDoctor,
+  getAllDoctors,
+  updateDoctor,
+  deleteDoctor,
+};
