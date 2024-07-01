@@ -7,6 +7,8 @@ router.post('/create-patient', patientControllers.createPatient);
 
 router.get('/', patientControllers.getAllPatients);
 
+router.patch('/:id', patientControllers.updatePatient);
+
 router.delete('/:id', patientControllers.deletePatient);
 
 export const patientRoutes = router;
