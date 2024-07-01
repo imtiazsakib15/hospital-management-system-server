@@ -47,4 +47,28 @@ const getAllPatients = async (
   }
 };
 
-export const patientControllers = { createPatient, getAllPatients };
+const deletePatient = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await Patient.deleteOne({ id });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Patient deleted',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const patientControllers = {
+  createPatient,
+  getAllPatients,
+  deletePatient,
+};
