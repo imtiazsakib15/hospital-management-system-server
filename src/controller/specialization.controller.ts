@@ -28,4 +28,26 @@ const createSpecialization = async (
   }
 };
 
-export const specializationControllers = { createSpecialization };
+const getAllSpecializations = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const specializations = await Specialization.find({});
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Specializations retrieved',
+      data: specializations,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const specializationControllers = {
+  createSpecialization,
+  getAllSpecializations,
+};

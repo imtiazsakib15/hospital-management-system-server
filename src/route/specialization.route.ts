@@ -8,4 +8,6 @@ router.post(
   specializationControllers.createSpecialization,
 );
 
+router.get('/', specializationControllers.getAllSpecializations);
+
 export const specializationRoutes = router;
