@@ -49,6 +49,24 @@ const getAllDoctors = async (
   }
 };
 
+const getADoctor = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const doctor = await Doctor.findOne({ id })
+      .populate('hospital')
+      .populate('specialization');
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Doctor retrieved',
+      data: doctor,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const updateDoctor = async (
   req: Request,
   res: Response,
@@ -93,6 +111,7 @@ const deleteDoctor = async (
 export const doctorControllers = {
   createDoctor,
   getAllDoctors,
+  getADoctor,
   updateDoctor,
   deleteDoctor,
 };

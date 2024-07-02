@@ -7,6 +7,8 @@ router.post('/create-doctor', doctorControllers.createDoctor);
 
 router.get('/', doctorControllers.getAllDoctors);
 
+router.get('/:id', doctorControllers.getADoctor);
+
 router.patch('/:id', doctorControllers.updateDoctor);
 
 router.delete('/:id', doctorControllers.deleteDoctor);
