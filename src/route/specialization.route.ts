@@ -10,6 +10,8 @@ router.post(
 
 router.get('/', specializationControllers.getAllSpecializations);
 
+router.get('/:id', specializationControllers.getASpecialization);
+
 router.patch('/:id', specializationControllers.updateSpecialization);
 
 router.delete('/:id', specializationControllers.deleteSpecialization);
