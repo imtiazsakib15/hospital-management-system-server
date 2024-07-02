@@ -7,8 +7,8 @@ const doctorSchema = new Schema<IDoctor>(
     name: String,
     email: String,
     phoneNo: String,
-    hospitalId: Number,
-    specializationId: Number,
+    hospital: { type: Schema.Types.ObjectId, ref: 'Hospital' },
+    specialization: { type: Schema.Types.ObjectId, ref: 'Specialization' },
   },
   { timestamps: true },
 );

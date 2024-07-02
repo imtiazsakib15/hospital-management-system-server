@@ -34,7 +34,9 @@ const getAllDoctors = async (
   next: NextFunction,
 ) => {
   try {
-    const doctors = await Doctor.find({});
+    const doctors = await Doctor.find({})
+      .populate('hospital')
+      .populate('specialization');
 
     sendResponse(res, {
       statusCode: httpStatus.OK,

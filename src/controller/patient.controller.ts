@@ -47,6 +47,22 @@ const getAllPatients = async (
   }
 };
 
+const getAPatient = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const patient = await Patient.findOne({ id });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Patient retrieved',
+      data: patient,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const updatePatient = async (
   req: Request,
   res: Response,
@@ -91,6 +107,7 @@ const deletePatient = async (
 export const patientControllers = {
   createPatient,
   getAllPatients,
+  getAPatient,
   updatePatient,
   deletePatient,
 };
