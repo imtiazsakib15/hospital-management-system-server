@@ -3,7 +3,6 @@ import { Appointment } from '../model/appointment.model';
 import httpStatus from 'http-status';
 import sendResponse from '../utils/sendResponse';
 import { generateId } from '../utils/generateId';
-import moment from 'moment';
 
 const createAppointment = async (
   req: Request,
@@ -14,7 +13,7 @@ const createAppointment = async (
     const { appointment } = req.body;
     const appointmentInfo = {
       id: await generateId(Appointment),
-      date: moment().format('L'),
+      date: new Date().toLocaleDateString(),
       ...appointment,
     };
     const result = await Appointment.create(appointmentInfo);

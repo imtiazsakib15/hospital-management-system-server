@@ -3,7 +3,6 @@ import { Schedule } from '../model/schedule.model';
 import httpStatus from 'http-status';
 import sendResponse from '../utils/sendResponse';
 import { generateId } from '../utils/generateId';
-import moment from 'moment';
 
 const createSchedule = async (
   req: Request,
@@ -14,7 +13,7 @@ const createSchedule = async (
     const { schedule } = req.body;
     const scheduleInfo = {
       id: await generateId(Schedule),
-      date: moment().format('L'),
+      // date: new Date().toLocaleDateString(),
       ...schedule,
     };
     const result = await Schedule.create(scheduleInfo);
@@ -45,6 +44,35 @@ const getAllSchedules = async (
       statusCode: httpStatus.OK,
       success: true,
       message: 'Schedules retrieved',
+      data: schedules,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getScheduleForAppointment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { hospital, specification, doctor, date } = req.query;
+
+    const schedules = await Schedule.findOne({
+      hospital,
+      specification,
+      doctor,
+      date,
+    })
+      .populate('doctor')
+      .populate('hospital')
+      .populate('specialization');
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Schedule retrieved for appointment',
       data: schedules,
     });
   } catch (error) {
@@ -119,6 +147,7 @@ const deleteSchedule = async (
 export const scheduleControllers = {
   createSchedule,
   getAllSchedules,
+  getScheduleForAppointment,
   getASchedule,
   updateSchedule,
   deleteSchedule,

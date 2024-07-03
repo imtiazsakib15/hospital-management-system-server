@@ -7,6 +7,8 @@ router.post('/create-schedule', scheduleControllers.createSchedule);
 
 router.get('/', scheduleControllers.getAllSchedules);
 
+router.get('/appointment', scheduleControllers.getScheduleForAppointment);
+
 router.get('/:id', scheduleControllers.getASchedule);
 
 router.patch('/:id', scheduleControllers.updateSchedule);
