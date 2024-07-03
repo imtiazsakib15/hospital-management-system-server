@@ -75,8 +75,30 @@ const getASchedule = async (
   }
 };
 
+const updateSchedule = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const { schedule } = req.body;
+    const result = await Schedule.updateOne({ id }, schedule, { new: true });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Schedule updated',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const scheduleControllers = {
   createSchedule,
   getAllSchedules,
   getASchedule,
+  updateSchedule,
 };

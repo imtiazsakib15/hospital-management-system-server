@@ -9,4 +9,6 @@ router.get('/', scheduleControllers.getAllSchedules);
 
 router.get('/:id', scheduleControllers.getASchedule);
 
+router.patch('/:id', scheduleControllers.updateSchedule);
+
 export const scheduleRoutes = router;
