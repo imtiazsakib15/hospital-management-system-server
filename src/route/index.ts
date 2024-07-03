@@ -4,6 +4,7 @@ import { hospitalRoutes } from './hospital.route';
 import { specializationRoutes } from './specialization.route';
 import { doctorRoutes } from './doctor.route';
 import { scheduleRoutes } from './schedule.route';
+import { appointmentRoutes } from './appointment.route';
 
 const router = Router();
 
@@ -33,6 +34,10 @@ const moduleRoutes: IModuleRoutes[] = [
   {
     path: '/schedules',
     route: scheduleRoutes,
+  },
+  {
+    path: '/appointments',
+    route: appointmentRoutes,
   },
 ];
 
