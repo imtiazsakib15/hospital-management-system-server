@@ -30,6 +30,29 @@ const createSchedule = async (
   }
 };
 
+const getAllSchedules = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const schedules = await Schedule.find({})
+      .populate('doctor')
+      .populate('hospital')
+      .populate('specialization');
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Schedules retrieved',
+      data: schedules,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const scheduleControllers = {
   createSchedule,
+  getAllSchedules,
 };
