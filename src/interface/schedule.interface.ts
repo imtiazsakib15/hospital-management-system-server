@@ -5,4 +5,6 @@ export interface ISchedule {
   doctor: Types.ObjectId;
   hospital: Types.ObjectId;
   specialization: Types.ObjectId;
+  date: string;
+  time: string;
 }

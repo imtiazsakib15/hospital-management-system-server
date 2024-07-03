@@ -7,6 +7,8 @@ const scheduleSchema = new Schema<ISchedule>(
     doctor: { type: Schema.Types.ObjectId, ref: 'Doctor' },
     hospital: { type: Schema.Types.ObjectId, ref: 'Hospital' },
     specialization: { type: Schema.Types.ObjectId, ref: 'Specialization' },
+    date: String,
+    time: String,
   },
   { timestamps: true },
 );
