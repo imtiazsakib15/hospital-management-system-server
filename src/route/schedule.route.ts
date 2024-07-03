@@ -7,4 +7,6 @@ router.post('/create-schedule', scheduleControllers.createSchedule);
 
 router.get('/', scheduleControllers.getAllSchedules);
 
+router.get('/:id', scheduleControllers.getASchedule);
+
 export const scheduleRoutes = router;

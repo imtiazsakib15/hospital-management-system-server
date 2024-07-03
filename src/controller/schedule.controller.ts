@@ -52,7 +52,31 @@ const getAllSchedules = async (
   }
 };
 
+const getASchedule = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const schedule = await Schedule.findOne({ id })
+      .populate('doctor')
+      .populate('hospital')
+      .populate('specialization');
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Schedule retrieved',
+      data: schedule,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const scheduleControllers = {
   createSchedule,
   getAllSchedules,
+  getASchedule,
 };
