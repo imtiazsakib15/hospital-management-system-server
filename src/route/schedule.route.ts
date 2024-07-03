@@ -11,4 +11,6 @@ router.get('/:id', scheduleControllers.getASchedule);
 
 router.patch('/:id', scheduleControllers.updateSchedule);
 
+router.delete('/:id', scheduleControllers.deleteSchedule);
+
 export const scheduleRoutes = router;

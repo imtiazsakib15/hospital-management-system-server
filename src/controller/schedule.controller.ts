@@ -96,9 +96,30 @@ const updateSchedule = async (
   }
 };
 
+const deleteSchedule = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await Schedule.deleteOne({ id });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Schedule deleted',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const scheduleControllers = {
   createSchedule,
   getAllSchedules,
   getASchedule,
   updateSchedule,
+  deleteSchedule,
 };
