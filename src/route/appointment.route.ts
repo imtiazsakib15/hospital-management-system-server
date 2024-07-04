@@ -5,4 +5,6 @@ const router = Router();
 
 router.post('/create-appointment', appointmentControllers.createAppointment);
 
+router.get('/', appointmentControllers.getAllAppointments);
+
 export const appointmentRoutes = router;

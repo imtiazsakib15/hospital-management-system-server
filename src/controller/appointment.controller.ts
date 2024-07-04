@@ -29,6 +29,29 @@ const createAppointment = async (
   }
 };
 
+const getAllAppointments = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const appointments = await Appointment.find({})
+      .populate('doctor')
+      .populate('hospital')
+      .populate('specialization');
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Appointments retrieved',
+      data: appointments,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const appointmentControllers = {
   createAppointment,
+  getAllAppointments,
 };
