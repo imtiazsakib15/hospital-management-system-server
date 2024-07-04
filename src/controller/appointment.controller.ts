@@ -74,6 +74,29 @@ const getAnAppointment = async (
   }
 };
 
+const updateAppointment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const { appointment } = req.body;
+    const result = await Appointment.updateOne({ id }, appointment, {
+      new: true,
+    });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Appointment updated',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteAppointment = async (
   req: Request,
   res: Response,
@@ -98,5 +121,6 @@ export const appointmentControllers = {
   createAppointment,
   getAllAppointments,
   getAnAppointment,
+  updateAppointment,
   deleteAppointment,
 };
