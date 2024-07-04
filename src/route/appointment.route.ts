@@ -7,4 +7,6 @@ router.post('/create-appointment', appointmentControllers.createAppointment);
 
 router.get('/', appointmentControllers.getAllAppointments);
 
+router.delete('/:id', appointmentControllers.deleteAppointment);
+
 export const appointmentRoutes = router;

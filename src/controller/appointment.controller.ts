@@ -51,7 +51,28 @@ const getAllAppointments = async (
   }
 };
 
+const deleteAppointment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await Appointment.deleteOne({ id });
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Appointment deleted',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const appointmentControllers = {
   createAppointment,
   getAllAppointments,
+  deleteAppointment,
 };
