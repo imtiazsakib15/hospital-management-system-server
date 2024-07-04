@@ -51,6 +51,29 @@ const getAllAppointments = async (
   }
 };
 
+const getAnAppointment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const appointment = await Appointment.findOne({ id })
+      .populate('doctor')
+      .populate('hospital')
+      .populate('specialization');
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Appointment retrieved',
+      data: appointment,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteAppointment = async (
   req: Request,
   res: Response,
@@ -74,5 +97,6 @@ const deleteAppointment = async (
 export const appointmentControllers = {
   createAppointment,
   getAllAppointments,
+  getAnAppointment,
   deleteAppointment,
 };
